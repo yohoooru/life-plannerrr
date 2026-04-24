@@ -8,30 +8,31 @@
 <style>
 /* ══ DESIGN TOKENS ══ */
 :root{
-  --bg:#F0F4F8;          /* page bg */
-  --surface:#FFFFFF;     /* card surface */
-  --blue:#7fbbdd;        /* primary blue */
-  --blue-lt:#c4e9f2;     /* light blue bg */
-  --blue-dk:#4A8EB8;     /* darker blue */
-  --amber:#ffc22f;       /* amber/yellow */
-  --amber-lt:#FFF8E6;    /* light amber bg */
-  --mint:#4CAF8A;        /* green done */
-  --mint-lt:#E6F7F0;     /* light green bg */
-  --coral:#E05C5C;       /* red overdue */
-  --coral-lt:#FEEFEF;    /* light red bg */
-  --orange:#f58b05;      /* orange accent */
-  --tx:#1A2E3D;          /* primary text */
-  --txm:#4A6478;         /* mid text */
-  --txf:#8AAABB;         /* faint text */
-  --bdr:#E2EBF0;         /* borders */
-  --shadow:0 2px 12px rgba(26,46,61,.07);
-  --shadow-md:0 6px 24px rgba(26,46,61,.1);
-  --shadow-lg:0 12px 40px rgba(26,46,61,.14);
+  --bg:#FFFFFF;          /* pure white */
+  --bg2:#F6FAFB;         /* very light for panels */
+  --surface:#FFFFFF;
+  --blue:#7fbbdd;
+  --blue-lt:#c4e9f2;
+  --blue-dk:#4A8EB8;
+  --amber:#ffc22f;
+  --amber-lt:#FFF8E6;
+  --mint:#4CAF8A;
+  --mint-lt:#E6F7F0;
+  --coral:#E05C5C;
+  --coral-lt:#FEEFEF;
+  --orange:#f58b05;
+  --tx:#1A2E3D;
+  --txm:#4A6478;
+  --txf:#8AAABB;
+  --bdr:#E8EFF4;
+  --shadow:0 2px 12px rgba(26,46,61,.06);
+  --shadow-md:0 6px 24px rgba(26,46,61,.09);
+  --shadow-lg:0 12px 40px rgba(26,46,61,.13);
   --rad:18px; --rad-sm:12px;
-  --nav-h:60px; --bot-h:68px;
+  --nav-h:72px; --bot-h:72px;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
-body{background:var(--bg);font-family:'Plus Jakarta Sans',sans-serif;color:var(--tx);min-height:100vh;padding-bottom:var(--bot-h);}
+body{background:var(--bg2);font-family:'Plus Jakarta Sans',sans-serif;color:var(--tx);min-height:100vh;padding-bottom:var(--bot-h);}
 ::-webkit-scrollbar{width:3px;height:3px;}::-webkit-scrollbar-thumb{background:var(--bdr);border-radius:2px;}
 @keyframes fadeUp{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
 @keyframes slideUp{from{transform:translateY(100%);}to{transform:translateY(0);}}
@@ -45,13 +46,15 @@ body{background:var(--bg);font-family:'Plus Jakarta Sans',sans-serif;color:var(-
   border-bottom:1px solid var(--bdr);
   display:flex;align-items:center;justify-content:space-between;
   padding:0 18px;
+  box-shadow:0 1px 8px rgba(26,46,61,.04);
 }
-.nav-left{display:flex;align-items:center;gap:10px;}
-.logo{font-family:'Lora',serif;font-size:17px;font-weight:700;color:var(--tx);border:none;background:transparent;outline:none;cursor:text;min-width:80px;letter-spacing:-.01em;}
+.nav-left{display:flex;flex-direction:column;gap:1px;}
+.greeting-row{display:flex;align-items:center;gap:5px;}
+.greeting-txt{font-size:12px;font-weight:600;color:var(--txm);}
+.greeting-name{font-size:12px;font-weight:800;color:var(--blue-dk);border:none;background:transparent;outline:none;cursor:text;min-width:40px;max-width:120px;}
+.logo{font-family:'Lora',serif;font-size:16px;font-weight:700;color:var(--tx);border:none;background:transparent;outline:none;cursor:text;min-width:80px;letter-spacing:-.01em;}
 .logo span{color:var(--amber);}
 .nav-right{display:flex;align-items:center;gap:8px;}
-.nav-icon-btn{width:34px;height:34px;border-radius:50%;border:none;background:var(--bg);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px;color:var(--txm);transition:all .15s;}
-.nav-icon-btn:hover{background:var(--blue-lt);}
 .backup-btn{padding:6px 12px;border-radius:20px;border:1.5px solid var(--bdr);background:var(--surface);font-size:11px;font-weight:700;color:var(--txm);cursor:pointer;display:flex;align-items:center;gap:4px;transition:all .15s;letter-spacing:.02em;}
 .backup-btn:hover{border-color:var(--blue);color:var(--blue);}
 
@@ -60,27 +63,34 @@ body{background:var(--bg);font-family:'Plus Jakarta Sans',sans-serif;color:var(-
   position:fixed;bottom:0;left:0;right:0;z-index:200;height:var(--bot-h);
   background:var(--surface);
   border-top:1px solid var(--bdr);
-  display:flex;align-items:center;
-  padding:0 8px;
-  box-shadow:0 -4px 20px rgba(26,46,61,.08);
+  display:flex;align-items:stretch;
+  padding:0;
+  box-shadow:0 -2px 16px rgba(26,46,61,.07);
 }
 .bot-tab{
   flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:4px;padding:8px 4px;cursor:pointer;border:none;background:transparent;
+  gap:5px;padding:8px 4px 10px;cursor:pointer;border:none;background:transparent;
   color:var(--txf);transition:color .2s;position:relative;
 }
-.bot-tab.on{color:var(--blue);}
-.bot-tab-icon{font-size:20px;line-height:1;transition:transform .2s;}
-.bot-tab.on .bot-tab-icon{transform:scale(1.1);}
-.bot-tab-lbl{font-size:10px;font-weight:700;letter-spacing:.04em;}
-.bot-tab-dot{
-  position:absolute;top:6px;width:22px;height:3px;border-radius:2px;
-  background:var(--blue);opacity:0;transition:opacity .2s;
+.bot-tab.on{color:var(--blue-dk);}
+/* Underline indicator at bottom (like reference style 1) */
+.bot-tab::after{
+  content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+  width:0;height:3px;border-radius:3px 3px 0 0;
+  background:var(--blue);transition:width .22s cubic-bezier(.4,0,.2,1);
 }
-.bot-tab.on .bot-tab-dot{opacity:1;}
+.bot-tab.on::after{width:28px;}
+.bot-tab-icon{
+  width:24px;height:24px;display:flex;align-items:center;justify-content:center;
+  transition:transform .2s;
+}
+.bot-tab.on .bot-tab-icon{transform:translateY(-1px);}
+.bot-tab-lbl{font-size:10px;font-weight:700;letter-spacing:.03em;line-height:1;}
+/* SVG icon sizing */
+.bot-tab-icon svg{width:22px;height:22px;stroke-width:1.8;}
 
 /* ── PANELS ── */
-.panel{display:none;padding-top:var(--nav-h);min-height:100vh;}
+.panel{display:none;padding-top:var(--nav-h);min-height:100vh;background:var(--bg2);}
 .panel.on{display:block;animation:fadeIn .2s ease;}
 
 /* ══════════════════════════════════════
@@ -280,13 +290,13 @@ body{background:var(--bg);font-family:'Plus Jakarta Sans',sans-serif;color:var(-
 }
 .g-year-pill-val{font-size:14px;font-weight:800;color:#fff;padding:5px 14px;letter-spacing:.02em;display:flex;align-items:center;gap:5px;}
 .g-year-pill-val span{font-size:10px;opacity:.7;}
-/* Year dropdown */
+/* Year dropdown — fixed so never clipped by overflow */
 .g-year-drop{
-  display:none;position:absolute;top:calc(100% + 6px);left:0;
+  display:none;position:fixed;
   background:var(--surface);border-radius:var(--rad-sm);
   box-shadow:var(--shadow-lg);border:1px solid var(--bdr);
-  padding:10px;z-index:999;
-  animation:popIn .18s ease;min-width:200px;
+  padding:12px;z-index:9999;
+  animation:popIn .18s ease;min-width:220px;
 }
 .g-year-drop.open{display:block;}
 .g-year-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;}
@@ -556,6 +566,10 @@ body{background:var(--bg);font-family:'Plus Jakarta Sans',sans-serif;color:var(-
 <!-- TOP NAV -->
 <header class="nav">
   <div class="nav-left">
+    <div class="greeting-row">
+      <span class="greeting-txt" id="greetingTxt">Good morning,</span>
+      <input class="greeting-name" id="greetingName" value="Ruby" maxlength="20" title="Click to change your name">
+    </div>
     <div contenteditable="true" class="logo" id="appTitle" spellcheck="false" title="Click to rename">Life <span>Planner</span></div>
   </div>
   <div class="nav-right">
@@ -566,23 +580,35 @@ body{background:var(--bg);font-family:'Plus Jakarta Sans',sans-serif;color:var(-
 <!-- BOTTOM TAB BAR -->
 <nav class="bot-nav">
   <button class="bot-tab on" id="bt-todo" onclick="switchTab('todo')">
-    <div class="bot-tab-dot"></div>
-    <div class="bot-tab-icon">📅</div>
+    <div class="bot-tab-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"/>
+      </svg>
+    </div>
     <div class="bot-tab-lbl">To-Do</div>
   </button>
   <button class="bot-tab" id="bt-goals" onclick="switchTab('goals')">
-    <div class="bot-tab-dot"></div>
-    <div class="bot-tab-icon">🎯</div>
+    <div class="bot-tab-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>
+      </svg>
+    </div>
     <div class="bot-tab-lbl">Goals</div>
   </button>
   <button class="bot-tab" id="bt-monthly" onclick="switchTab('monthly')">
-    <div class="bot-tab-dot"></div>
-    <div class="bot-tab-icon">📆</div>
+    <div class="bot-tab-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+      </svg>
+    </div>
     <div class="bot-tab-lbl">Monthly</div>
   </button>
   <button class="bot-tab" id="bt-vision" onclick="switchTab('vision')">
-    <div class="bot-tab-dot"></div>
-    <div class="bot-tab-icon">✨</div>
+    <div class="bot-tab-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+      </svg>
+    </div>
     <div class="bot-tab-lbl">Vision</div>
   </button>
 </nav>
@@ -756,8 +782,14 @@ body{background:var(--bg);font-family:'Plus Jakarta Sans',sans-serif;color:var(-
 <!-- ═══ TAB 4: VISION ═══ -->
 <div id="p-vision" class="panel vision-panel">
   <div class="v-tb">
-    <button class="v-tb-btn" onclick="addNote()">✦ Note</button>
-    <button class="v-tb-btn" onclick="document.getElementById('imgPick').click()">🖼 Image</button>
+    <button class="v-tb-btn" onclick="addNote()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      Note
+    </button>
+    <button class="v-tb-btn" onclick="document.getElementById('imgPick').click()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      Image
+    </button>
     <input type="file" id="imgPick" class="f-hidden" accept="image/*" onchange="addImgSticker(this)">
     <div class="v-tb-sep"></div>
     <div class="v-tb-lbl">BG</div><div class="v-color-row" id="bgSwatches"></div>
